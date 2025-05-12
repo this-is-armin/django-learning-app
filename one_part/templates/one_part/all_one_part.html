@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} تمام تک قسمتی ها {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'one_part/css/all_one_part.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <header class="one_part_top_part">
+        <div class="one_part_top_background"></div>
+        <p class="one_part_top_text">تمام تک قسمتی ها</p>
+    </header>
+
+    <form class="search_form" action="" method="get">
+        <input type="search" class="search_form_input" name="search" placeholder="Search Term In English..." required>
+        <input type="submit" class="search_form_btn" value="SEARCH">
+    </form>
+
+    <section class="all_parts_container">
+        {% if all_one_part %}
+        {% for one_part in page_obj %}
+        <article class="one_part">
+            <h2><a href="{{ one_part.detail }}" class="one_part_link">{{ one_part.title }}</a></h2><hr>
+            <p class="one_part_tags">{{ one_part.created }}</p>
+        </article>
+        {% endfor %}
+        {% else %}
+        <div align="center">
+            <h1>فعلا هیچ ویدیو تک قسمتی وجود ندارد</h1>
+        </div>
+        {% endif %}
+    </section>
+</main>
+
+{% if all_one_part.count > 1 %}
+{% include 'includes/pagination.html' %}
+{% endif %}
+
+{% endblock %}

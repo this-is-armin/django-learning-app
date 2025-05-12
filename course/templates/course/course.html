@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ course.title }} {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'course/css/course.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="course_container">
+    <section class="course_top_container">
+        <p class="course_top_title">{{ course.title }}</p>
+        <p class="course_top_description">{{ course.description }}</p>
+        {% if request.user.is_authenticated %}
+        <div class='course-button'>
+            {% if is_saved == False %}
+            <a href="{{ course.course_save }}" class="button-link">ذخیره این دوره</a>
+            {% else %}
+            <a href="{{ course.course_un_save }}" class="button-link">حذف این دوره از ذخیره شده ها</a>
+            {% endif %}
+        </div>
+        <br>
+        {% endif %}
+    </section>
+    <hr>
+    <section class="episodes_list_container">
+        {% if episodes %}
+        {% for episode in episodes %}
+        <div class="episode_container"> <p class="episode_counter">{{ episode.counter }}</p> <a href="{{ episode.detail }}" class="episode_link">{{ episode.description }}</a></div>
+        {% endfor %}
+        {% else %}
+        <h1>فعلا هیچ قسمتی برای این دوره وجود ندارد</h1>
+        {% endif %}
+    </section>
+</section>
+
+{% endblock %}

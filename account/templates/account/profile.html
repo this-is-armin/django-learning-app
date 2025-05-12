@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} پروفایل {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'account/css/profile.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <header class="profile_top_part">
+        <div class="profile_top_background"></div>
+        <p class="profile_top_text">صفحه پروفایل</p>
+    </header>
+</main>
+
+<div class="table-container">
+    <table class="profile-table" dir="rtl" lang="fa">
+        <tr>
+            <td>نام کاربری</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td>ایمیل</td>
+            <td>{{ user.email }}</td>
+        </tr>
+  </table>
+</div>
+
+<div class='profile-button'>
+    <a href="{% url 'account:sign-out' %}" class="button-link">خروج</a>
+    <a href="{% url 'account:saved-courses' user.username %}" class="button-link">دوره ها</a>
+    <a href="{% url 'account:saved-one-parts' user.username %}" class="button-link">تک قسمتی ها</a>
+</div>
+<br>
+
+{% endblock %}

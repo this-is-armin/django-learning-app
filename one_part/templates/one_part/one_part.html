@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ one_part.title }} {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'one_part/css/one_part.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="main_container">
+    <h1>{{ one_part.title }}</h1>
+    {% if request.user.is_authenticated %}
+    <div class='one-part-button'>
+        {% if is_saved == False %}
+        <a href="{{ one_part.one_part_save }}" class="button-link">ذخیره این تک قسمتی</a>
+        {% else %}
+        <a href="{{ one_part.one_part_un_save }}" class="button-link">حذف این تک قسمتی از ذخیره شده ها</a>
+        {% endif %}
+    </div>
+    <br>
+    {% endif %}
+    <video src="/media/{{ one_part.video }}" controls></video>
+</section>
+
+<section class="form_container">
+    <p class="form_title">ارسال نظر</p>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" class="form_input" placeholder="نام شما">
+        <textarea name="comment" class="form_input comment_input" placeholder="نظر شما"></textarea>
+        <input type="submit" name="submit" value="ارسال" class="submit_btn">
+    </form>
+</section>
+
+<section class="all_comments_container">
+    {% if comments %}
+    {% for comment in comments %}
+    <article class="comment_container">
+        <p class="comments_sender">{{ comment.name }}</p><small class="comment_date">{{ comment.created }}</small>
+        <p class="comment">{{ comment.comment }}</p>
+    </article>
+    {% endfor %}
+    {% endif %}
+</section>
+{% endblock %}

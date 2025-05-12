@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ episode.description }} {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'one_part/css/one_part.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="main_container">
+    <h1>{{ episode.title }}</h1>
+    <video src="/media/{{ episode.video }}" controls></video>
+</section>
+
+<section class="form_container">
+    <p class="form_title">ارسال نظر</p>
+    <form class="form" action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" class="form_input" placeholder="نام شما">
+        <textarea name="comment" class="form_input comment_input" placeholder="نظر شما"></textarea>
+        <input type="submit" name="submit" value="ارسال" class="submit_btn">
+    </form>
+</section>
+
+<section class="all_comments_container">
+    {% if comments %}
+    {% for comment in comments %}
+    <article class="comment_container">
+        <p class="comments_sender">{{ comment.name }}</p><small class="comment_date">{{ comment.created }}</small>
+        <p class="comment">{{ comment.comment }}</p>
+    </article>
+    {% endfor %}
+    {% endif %}
+</section>
+{% endblock %}

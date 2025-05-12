@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} تمام دوره ها {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'course/css/all_courses.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="all_courses_top_container">
+    <img src="{% static 'course/img/all_courses_wallpaper.jpg' %}" class="all_courses_wallpaper" alt="">
+    <p class="all_courses_title">تمام دوره ها</p>
+</section>
+
+<section class="all_courses_container">
+    {% if courses %}
+    {% for course in page_obj %}
+    <article class="course_container">
+        <img src="/media/{{ course.image }}" class="course_image">
+        <h2><a href="{{ course.detail }}" class="course_link">{{ course.title }}</a></h2>
+    </article>
+    {% endfor %}
+    {% else %}
+    <div align="center">
+        <h1>فعلا هیچ دوره ای وجود ندارد</h1>
+    </div>
+    {% endif %}
+</section>
+
+{% if courses.count > 4 %}
+{% include 'includes/pagination.html' %}
+{% endif %}
+
+{% endblock %}

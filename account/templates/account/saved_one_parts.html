@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} ویدیوهای تک قسمتی ذخیره شده {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'account/css/saved_one_parts.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <header class="saved_one_parts_top_part">
+        <div class="saved_one_parts_top_background"></div>
+        <p class="saved_one_parts_top_text"> تک قسمتی های ذخیره شده </p>
+    </header>
+</main>
+
+<section class="saved_one_parts_container">
+    {% if saved_one_parts %}
+    {% for saved_one_part in saved_one_parts %}
+    <article class="saved_one_part">
+        <h2><a href="{{ saved_one_part.one_part.detail }}" class="saved_one_part_link">{{ saved_one_part.one_part.title }}</a></h2><hr>
+        <p class="saved_one_part_tags">{{ saved_one_part.one_part.created }}</p>
+    </article>
+    {% endfor %}
+    {% else %}
+    <div align="center">
+        <h1>فعلا هیچ ویدیو تک قسمتی ذخیره نشده است</h1>
+    </div>
+    {% endif %}
+</section>
+
+{% endblock %}

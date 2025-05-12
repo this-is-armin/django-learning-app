@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} دوره های ذخیره شده {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'account/css/saved_courses.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <header class="saved_courses_top_part">
+        <div class="saved_courses_top_background"></div>
+        <p class="saved_courses_top_text"> دوره های ذخیره شده</p>
+    </header>
+</main>
+
+<section class="all_saved_courses_container">
+    {% if saved_courses %}
+    {% for saved_course in saved_courses %}
+    <article class="saved_course">
+        <h2><a href="{{ saved_course.course.detail }}" class="saved_course_link">{{ saved_course.course.title }}</a></h2><hr>
+        <p class="saved_course_tags">{{ saved_course.created }}</p>
+    </article>
+    {% endfor %}
+    {% else %}
+    <div align="center">
+        <h1>فعلا هیچ دوره ای ذخیره نشده است</h1>
+    </div>
+    {% endif %}
+</section>
+
+{% endblock %}

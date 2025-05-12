@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} ورود {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'account/css/sign_in.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="sign_in_form_container">
+    <p class="sign_in_form_title">ورود به حساب کاربری</p>
+    <form class="sign_in_form" action="" method="post">
+        {% csrf_token %}
+        {% if messages %}
+        {% for message in messages %}
+        <div id="message">
+            <p>{{ message }}</p><br>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <input type="text" class="sign_in_input" name="username" value="{{ username|default:'' }}" placeholder="User Name"><br/><br/>
+        <input type="password" id="password" class="sign_in_input" name="password" value="{{ password|default:'' }}" placeholder="Password"><br/><br/>
+        <input type="submit" class="sign_in_submit" value="ورود">
+    </form>
+
+    <p><a href="{% url 'account:sign-up' %}" class="sign_in_sign_up">حساب کاربری ندارید؟ یکی ایجاد کنید</a></p>
+</section>
+
+{% endblock %}

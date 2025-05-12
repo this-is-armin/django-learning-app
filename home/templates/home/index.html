@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} صفحه اصلی {% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="index_top_part">
+    <article class="index_top_img_container">
+        <img src="{% static 'home/img/index_top.jpg' %}" class="index_top_img" alt="">
+        <p class="index_top_img_text">Learn To Create Something Magnificent...</p>
+    </article>
+</section>
+
+<section class="index_all_free">
+    <p class="index_all_free_text">مشکلات مالی نباید مانعی برای یادگیری باشد</p>
+</section>
+
+{% endblock %}
