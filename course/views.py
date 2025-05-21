@@ -58,7 +58,7 @@ class EpisodeView(View):
 
     def setup(self, request, *args, **kwargs):
         self.course_instance = get_object_or_404(Course, slug=kwargs['slug'])
-        self.episode_instance = get_object_or_404(Episode, counter=kwargs['counter'])
+        self.episode_instance = get_object_or_404(Episode, course=self.course_instance, counter=kwargs['counter'])
         return super().setup(request, *args, **kwargs)
     
     def dispatch(self, request, *args, **kwargs):

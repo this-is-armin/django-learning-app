@@ -87,16 +87,6 @@ class SignOutView(View):
         return redirect('home:home')
 
 
-class ForgetPasswordView(View):
-    template_name = 'account/forget_password.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-    
-    def get(self, request):
-        return render(request, self.template_name)
-
-
 class ProfileView(View):
     template_name = 'account/profile.html'
 
